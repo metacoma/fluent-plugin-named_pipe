@@ -1,5 +1,5 @@
 require 'forwardable'
-require 'mkfifo'
+#require 'mkfifo'
 
 module Fluent
   module PluginNamedPipe
@@ -9,10 +9,10 @@ module Fluent
       READ_TIMEOUT = 1
 
       def initialize(file_path, mode = :r)
-        if !File.exist?(file_path)
-          File.mkfifo(file_path)
-          File.chmod(0666, file_path)
-        end
+        #if !File.exist?(file_path)
+        #  File.mkfifo(file_path)
+        #  File.chmod(0666, file_path)
+        #end
 
         @file_path = file_path
         @mode = mode
