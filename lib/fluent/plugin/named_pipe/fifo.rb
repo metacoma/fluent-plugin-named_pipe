@@ -34,7 +34,7 @@ module Fluent
         if nil != (idx = @buf.index("\n"))
           line = @buf[0, idx + 1]
           @buf = @buf[idx + 1, @buf.length - line.length]
-          return line
+          return line + "\n"
         end
 
         res = IO.select([@pipe], [], [], READ_TIMEOUT)
