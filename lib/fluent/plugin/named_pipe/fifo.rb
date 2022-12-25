@@ -34,7 +34,15 @@ module Fluent
         if nil != (idx = @buf.index("\n"))
           line = @buf[0, idx + 1]
           @buf = @buf[idx + 1, @buf.length - line.length]
-          return line + "\n"
+          return line
+        end
+
+        # ugliest hack to detect the prompt and the end of the shell output
+        if (@buf.length and @buf.match(/bebebeko/))
+          puts "PROMPT XXX detected"
+          line = @buf + "\n"
+          @buf = ''
+          return line
         end
 
         res = IO.select([@pipe], [], [], READ_TIMEOUT)
